@@ -1,2 +1,1 @@
 # yum-central
-#hiii!!!
