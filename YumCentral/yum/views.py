@@ -1,7 +1,10 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from .models import *
 from .forms import *
+from .triggers import *
+
 # Create your views here.
+
 
 def index(request):
     return render(request, 'index.html')
@@ -69,9 +72,8 @@ def display_Rewards(request):
 def add_item(request, cls):
     if request.method == "POST":
         form = cls(request.POST)
-
         if form.is_valid():
-            form.save()
+            form.save(commit=True)
             return redirect('index')
 
     else:
@@ -80,10 +82,27 @@ def add_item(request, cls):
 
 
 def add_Restaurant(request):
-    return add_item(request, RestaurantForm)
+    if request.method == "POST":
+        form = RestaurantForm(request.POST)
+        if form.is_valid():
+            form.save(commit=True)
+            return redirect('index')
+
+    else:
+        form = RestaurantForm()
+        return render(request, 'add_new.html', {'form': form})
 
 def add_Employee(request):
-    return add_item(request, EmployeeForm)
+    if request.method == "POST":
+        form = EmployeeForm(request.POST)
+        if form.is_valid():
+            form.save(commit=True)
+            add_num_employees(form.cleaned_data.get("Restaurant"))
+            return redirect('index')
+
+    else:
+        form = EmployeeForm()
+        return render(request, 'add_new.html', {'form': form})
 
 def add_Location(request):
     return add_item(request, LocationForm)
@@ -103,7 +122,7 @@ def edit_item(request, pk, model, cls):
     if request.method == "POST":
         form = cls(request.POST, instance=item)
         if form.is_valid():
-            form.save()
+            form.save(commit=True)
             return redirect('index')
     else:
         form = cls(instance=item)
@@ -145,9 +164,15 @@ def delete_Restaurant(request, pk):
 def delete_Employee(request, pk):
 
     template = 'index.html'
+
+    del_num_employees(pk)
     Employee.objects.filter(pk=pk).delete()
 
+
     items = Employee.objects.all()
+
+
+
 
     context = {
         'items': items,
@@ -205,5 +230,4 @@ def delete_Rewards(request, pk):
     context = {
         'items': items,
     }
-
     return render(request, template, context)

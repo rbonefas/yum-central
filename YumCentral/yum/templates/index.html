@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-
 {% block body %}
 
   <div class="add_buttons">
@@ -30,7 +29,6 @@
   </div>
 
 <h4>Currently Viewing {{ header }}</h4>
-
 <table class="table table-hover">
 
 <!--    Restaurant Table View-->
@@ -76,7 +74,11 @@
         <td>{{ item.Restaurant_Id }}
         <td>{{ item.Name }}</td>
         <td>{{ item.Type }}</td>
-        <td>{{ item.Max_Capacity }}</td>
+        <td>{{ item.Dining_Environment}}</td>
+        <td>{{ item.Number_Total_Employees}}</td>
+        <td>{{ item.Cuisine}}</td>
+        <td>{{ item.Max_Capacity}}</td>
+        <td>{{ item.Meal_Type}}</td>
         <td>{{ item.Rating }}</td>
 
         <td>
@@ -98,7 +100,7 @@
             Employee_Id
         </th>
         <th>
-            Restaurant_Id
+            Restaurant
         </th>
         <th>
             Name
@@ -124,7 +126,13 @@
 
       <tr>
         <td>{{ item.Employee_Id }}
+        <td>{{ item.Restaurant }}</td>
         <td>{{ item.Name }}</td>
+        <td>{{ item.Job_Type }}</td>
+        <td>{{ item.Hourly_Salary }}</td>
+        <td>{{ item.Weekly_Hours }}</td>
+        <td>{{ item.Satisfaction }}</td>
+
         <td>
             <a href="{% url 'edit_Employee' item.pk %}" class="btn btn-warning btn-sm" role="button" aria-pressed="true" > Edit</a>
             <a href="{% url 'delete_Employee' item.pk%}" class="btn btn-danger btn-sm" role="button" aria-pressed="true" > x</a>

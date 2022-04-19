@@ -23,7 +23,7 @@ class Restaurant(models.Model):
     Rating = models.IntegerField(choices=choices)
 
     def __str__(self):
-        return 'Restaurant_Id : {0} Name : {1} Type : {2}'.format(self.Restaurant_Id, self.Name, self.Type)
+        return '{}'.format(self.Restaurant_Id)
 
 class Employee(models.Model):
     Employee_Id = models.IntegerField(primary_key=True, null=False)
