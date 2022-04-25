@@ -36,6 +36,12 @@
     <h4>{{ header }}</h4>
     <table class="table table-hover">
 
+        {%  if header == NULL %}
+            <div class="image" style="text-align: center; position:fixed; top:250px; left:400px">
+                {% load static %} <img src="{% static "media/yum-central-image.png" %}" width="608" height="472" alt="logo"/>
+            </div>
+        {% endif %}
+
         <!--    Restaurant Table View-->
         {% if header == "Restaurant" %}
             <thead>
