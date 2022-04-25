@@ -15,7 +15,7 @@ def add_num_employees(ri):
 
 
 def del_num_employees(e_id):
-    con = sqlite3.connect(BASE_DIR/ 'db.sqlite3')
+    con = sqlite3.connect(BASE_DIR/'db.sqlite3')
     cur = con.cursor()
 
     cur.execute('''
@@ -32,4 +32,12 @@ def del_num_employees(e_id):
     '''.format(ri))
     con.commit()
 
-del_num_employees(1)
+
+def updateCosts(id):
+    con = sqlite3.connect(BASE_DIR/'db.sqlite3')
+    cursor = con.cursor()
+    cursor.execute(''' 
+    UPDATE yum_financial
+    SET Costs_Per_Month = ( SELECT Total_Costs FROM yum_cost WHERE Cost_id = {})
+    WHERE Cost_id = {};'''.format(id,id))
+    con.commit()

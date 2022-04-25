@@ -29,6 +29,56 @@
   </div>
 
 <h4>Currently Viewing {{ header }}</h4>
+
+
+<!--  FILTER SECTION (Janky, but works)-->
+{% if header == "Restaurant" %}
+
+<form method="get">
+    {{rest_filter.form}}
+    <button class="btn btn-primary" type="submit">Search</button>
+</form>
+
+{% endif %}
+
+{% if header == "Employee" %}
+<form method="get">
+    {{emp_filter.form}}
+    <button class="btn btn-primary" type="submit">Search</button>
+</form>
+{% endif %}
+
+{% if header == "Location" %}
+<form method="get">
+    {{loc_filter.form}}
+    <button class="btn btn-primary" type="submit">Search</button>
+</form>
+{% endif %}
+
+{% if header == "Financial" %}
+<form method="get">
+    {{fin_filter.form}}
+    <button class="btn btn-primary" type="submit">Search</button>
+</form>
+{% endif %}
+
+{% if header == "Cost" %}
+<form method="get">
+    {{cost_filter.form}}
+    <button class="btn btn-primary" type="submit">Search</button>
+</form>
+{% endif %}
+
+{% if header == "Rewards" %}
+<form method="get">
+    {{rew_filter.form}}
+    <button class="btn btn-primary" type="submit">Search</button>
+</form>
+{% endif %}
+
+
+<!-- End of Filters-->
+
 <table class="table table-hover">
 
 <!--    Restaurant Table View-->

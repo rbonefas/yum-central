@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'yum',
+    'django_filters',
 ]
 
 MIDDLEWARE = [

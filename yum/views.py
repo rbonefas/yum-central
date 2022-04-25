@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect,get_object_or_404
 from .models import *
 from .forms import *
 from .Triggers import *
+from .filters import *
 
 # Create your views here.
 
@@ -12,59 +13,74 @@ def index(request):
 def display_Restaurant(request):
     items = Restaurant.objects.all()
 
+    filter = RestaurantFilter(request.GET,queryset=items)
+
+    items = filter.qs
     context = {
         "items": items,
-        "header": "Restaurant"
+        "header": "Restaurant",
+        "rest_filter": filter
     }
+
 
     return render(request, 'index.html', context)
 
 def display_Employee(request):
     items = Employee.objects.all()
-
+    filter = EmployeeFilter(request.GET, queryset=items)
+    items = filter.qs
     context = {
         "items": items,
-        "header" : "Employee"
+        "header" : "Employee",
+        "emp_filter": filter
     }
 
     return render(request, 'index.html', context)
 
 def display_Location(request):
     items = Location.objects.all()
-
+    filter = LocationFilter(request.GET, queryset=items)
+    items = filter.qs
     context = {
         "items": items,
-        "header" : "Location"
+        "header" : "Location",
+        "loc_filter": filter
     }
 
     return render(request, 'index.html', context)
 
 def display_Financial(request):
     items = Financial.objects.all()
-
+    filter = FinancialFilter(request.GET, queryset=items)
+    items = filter.qs
     context = {
         "items": items,
-        "header" : "Financial"
+        "header" : "Financial",
+        "fin_filter":filter
     }
 
     return render(request, 'index.html', context)
 
 def display_Cost(request):
     items = Cost.objects.all()
-
+    filter = CostFilter(request.GET, queryset=items)
+    items = filter.qs
     context = {
         "items": items,
-        "header": "Cost"
+        "header": "Cost",
+        "cost_filter": filter
     }
 
     return render(request, 'index.html', context)
 
 def display_Rewards(request):
     items = Rewards_Program.objects.all()
-
+    filter = RewardsFilter(request.GET, queryset=items)
+    items = filter.qs
     context = {
         "items": items,
-        "header": "Rewards"
+        "header": "Rewards",
+        "rew_filter": filter
     }
 
     return render(request, 'index.html', context)
@@ -142,7 +158,18 @@ def edit_Financial(request,pk):
     return edit_item(request, pk, Financial, FinancialForm)
 
 def edit_Cost(request,pk):
-    return edit_item(request, pk, Cost, CostForm)
+    item = get_object_or_404(Cost, pk=pk)
+    cls = CostForm
+    if request.method == "POST":
+        form = cls(request.POST, instance=item)
+        if form.is_valid():
+            form.save(commit=True)
+            updateCosts(pk)
+            return redirect('index')
+    else:
+        form = cls(instance=item)
+
+        return render(request, 'edit_item.html', {'form': form})
 
 def edit_Rewards(request,pk):
     return edit_item(request, pk, Rewards_Program, RewardsForm)
