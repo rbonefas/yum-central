@@ -1,6 +1,5 @@
 from django.urls import re_path as url
 from .views import *
-from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     url(r'^$', index, name='index'),
@@ -33,5 +32,3 @@ urlpatterns = [
     url(r'^Cost/delete/(?P<pk>\d+)$', delete_Cost, name="delete_Cost"),
     url(r'^Rewards/delete/(?P<pk>\d+)$', delete_Rewards, name="delete_Reward")
 ]
-
-urlpatterns += staticfiles_urlpatterns()

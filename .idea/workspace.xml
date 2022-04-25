@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9304a50c-ad59-42f0-9a59-bf59d352f6b6" name="Changes" comment="" />
+    <list default="true" id="9304a50c-ad59-42f0-9a59-bf59d352f6b6" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/YumCentral/yum/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/YumCentral/yum/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/YumCentral/yum/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/YumCentral/yum/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/YumCentral/yum/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/YumCentral/yum/urls.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -46,7 +51,7 @@
       <option name="presentableId" value="Default" />
       <updated>1650393224150</updated>
       <workItem from="1650393227407" duration="1502000" />
-      <workItem from="1650919993720" duration="283000" />
+      <workItem from="1650919993720" duration="673000" />
     </task>
     <servers />
   </component>
