@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from .models import *
 from .forms import *
-from .Triggers import *
+from .triggers import *
 from .filters import *
 
 # Create your views here.
