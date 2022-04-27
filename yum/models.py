@@ -48,6 +48,9 @@ class Employee(models.Model):
     )
     Satisfaction = models.IntegerField(choices=choices)
 
+    @property
+    def Weekly_Salary(self):
+        return self.Hourly_Salary/self.Weekly_Hours
 
 class Location(models.Model):
     Location_Id = models.IntegerField(primary_key=True, null=False)
@@ -59,6 +62,7 @@ class Location(models.Model):
 
 class Cost(models.Model):
     Cost_Id = models.IntegerField(primary_key=True,null=False)
+    Total_Salaries = models.FloatField(default=0)
     Rent = models.FloatField()
     Utilities = models.FloatField()
     Inventory_Expenses = models.FloatField()

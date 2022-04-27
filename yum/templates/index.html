@@ -36,7 +36,7 @@
 
 <form method="get">
     {{rest_filter.form}}
-    <button class="btn btn-primary" type="submit">Search</button>
+    <a href="{% url 'display_Restaurant_Report' %}" class="btn btn-primary btn-md btn-trim" role="button">Generate Report</a>
 </form>
 
 {% endif %}
@@ -165,6 +165,9 @@
             Weekly_Hours
         </th>
         <th>
+            Weekly_Salary
+        </th>
+        <th>
             Employee_Satisfaction
         </th>
     </tr>
@@ -181,7 +184,9 @@
         <td>{{ item.Job_Type }}</td>
         <td>{{ item.Hourly_Salary }}</td>
         <td>{{ item.Weekly_Hours }}</td>
+        <td>{{ item.Weekly_Salary}}</td>
         <td>{{ item.Satisfaction }}</td>
+
 
         <td>
             <a href="{% url 'edit_Employee' item.pk %}" class="btn btn-warning btn-sm" role="button" aria-pressed="true" > Edit</a>

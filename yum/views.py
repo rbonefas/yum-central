@@ -149,7 +149,20 @@ def edit_Restaurant(request,pk):
     return edit_item(request, pk, Restaurant, RestaurantForm)
 
 def edit_Employee(request,pk):
-    return edit_item(request, pk, Employee, EmployeeForm)
+    item = get_object_or_404(Employee, pk=pk)
+    cls = EmployeeForm
+    if request.method == "POST":
+        form = cls(request.POST, instance=item)
+        if form.is_valid():
+            form.save(commit=True)
+            update_weekly_salary(form.cleaned_data.get("Restaurant"))
+            totalCostExpenses(pk)
+            updateCosts(pk)
+            return redirect('index')
+    else:
+        form = cls(instance=item)
+
+        return render(request, 'edit_item.html', {'form': form})
 
 def edit_Location(request,pk):
     return edit_item(request, pk, Location, LocationForm)
@@ -165,6 +178,7 @@ def edit_Cost(request,pk):
         if form.is_valid():
             form.save(commit=True)
             updateCosts(pk)
+            totalCostExpenses(pk)
             return redirect('index')
     else:
         form = cls(instance=item)
@@ -258,3 +272,13 @@ def delete_Rewards(request, pk):
         'items': items,
     }
     return render(request, template, context)
+
+
+def display_Restaurant_Report(request):
+    items = Restaurant.objects.all()
+    context = {
+        "items": items,
+        "header" : "Restaurant_Report"
+    }
+
+    return render(request, 'index.html', context)

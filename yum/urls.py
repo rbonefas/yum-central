@@ -8,6 +8,7 @@ urlpatterns = [
     url(r'^display_Financial$', display_Financial, name='display_Financial'),
     url(r'^display_Cost$', display_Cost, name='display_Cost'),
     url(r'^display_Reward$', display_Rewards, name='display_Rewards'),
+    url(r'^display_Restaurant_Report', display_Restaurant_Report, name='display_Restaurant_Report'),
 
     url(r'^add_Restaurant$', add_Restaurant, name='add_Restaurant'),
     url(r'^add_Employee$', add_Employee, name='add_Employee'),
