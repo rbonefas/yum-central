@@ -1,6 +1,8 @@
 from django.db import models
+from pathlib import Path
+import sqlite3
 
-
+BASE_DIR = Path(__file__).resolve().parent.parent
 # Create your models here.
 
 class Restaurant(models.Model):
@@ -21,6 +23,19 @@ class Restaurant(models.Model):
         (5, 5)
     )
     Rating = models.IntegerField(choices=choices)
+
+    @property
+    def Avg_Rating(self):
+        con = sqlite3.connect(BASE_DIR / 'db.sqlite3')
+        cur = con.cursor()
+        cur.execute('''
+            SELECT AVG(Rating)
+            FROM yum_restaurant r
+            WHERE r.Cuisine = '{}';
+            '''.format(self.Cuisine))
+        print(cur.fetchall()[0][0])
+        return cur.fetchall()[0][0]
+
 
     def __str__(self):
         return '{}'.format(self.Restaurant_Id)
@@ -50,7 +65,7 @@ class Employee(models.Model):
 
     @property
     def Weekly_Salary(self):
-        return self.Hourly_Salary/self.Weekly_Hours
+        return self.Hourly_Salary*self.Weekly_Hours
 
 class Location(models.Model):
     Location_Id = models.IntegerField(primary_key=True, null=False)
@@ -68,6 +83,9 @@ class Cost(models.Model):
     Inventory_Expenses = models.FloatField()
     Total_Costs = models.FloatField()
 
+    def __str__(self):
+        return '{}'.format(self.Cost_Id)
+
 
 class Financial(models.Model):
     Financial_Id = models.IntegerField(primary_key=True)
@@ -77,6 +95,9 @@ class Financial(models.Model):
     Revenue_Per_Month = models.FloatField()
     Costs_Per_Month = models.FloatField()
     Net_Profit_Per_Month = models.FloatField()
+
+    def __str__(self):
+        return '{}'.format(self.Financial_Id)
 
 
 class Rewards_Program(models.Model):

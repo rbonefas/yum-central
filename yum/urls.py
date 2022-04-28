@@ -7,8 +7,13 @@ urlpatterns = [
     url(r'^display_Location$', display_Location, name='display_Location'),
     url(r'^display_Financial$', display_Financial, name='display_Financial'),
     url(r'^display_Cost$', display_Cost, name='display_Cost'),
-    url(r'^display_Reward$', display_Rewards, name='display_Rewards'),
+    url(r'^display_Rewards$', display_Rewards, name='display_Rewards'),
     url(r'^display_Restaurant_Report', display_Restaurant_Report, name='display_Restaurant_Report'),
+    url(r'^display_Employee_Report', display_Employee_Report, name='display_Employee_Report'),
+    url(r'^display_Financial_Report', display_Financial_Report, name='display_Financial_Report'),
+    url(r'^display_Rewards_Report', display_Rewards_Report, name='display_Rewards_Report'),
+    url(r'^display_Location_Report', display_Location_Report, name='display_Location_Report'),
+
 
     url(r'^add_Restaurant$', add_Restaurant, name='add_Restaurant'),
     url(r'^add_Employee$', add_Employee, name='add_Employee'),
@@ -30,7 +35,7 @@ urlpatterns = [
     url(r'^Location/delete/(?P<pk>\d+)$', delete_Location, name="delete_Location"),
     url(r'^Financial/delete/(?P<pk>\d+)$', delete_Financial, name="delete_Financial"),
     url(r'^Cost/delete/(?P<pk>\d+)$', delete_Cost, name="delete_Cost"),
-    url(r'^Rewards/delete/(?P<pk>\d+)$', delete_Rewards, name="delete_Reward")
+    url(r'^Rewards/delete/(?P<pk>\d+)$', delete_Rewards, name="delete_Rewards")
 
 
 ]
