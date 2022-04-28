@@ -1,0 +1,568 @@
+{% extends 'base.html' %}
+{% block body %}
+
+  <div class="add_buttons">
+
+    <div class="button-group">
+      <a href="{% url 'display_Restaurant' %}" class="btn btn-primary btn-md btn-trim" role="button"> Restaurant</a>
+      <a href="{% url 'add_Restaurant' %}" class="btn btn-warning btn-sm btn-pad" role="button"> +</a>
+
+      <a href="{% url 'display_Employee' %}" class="btn btn-primary btn-md btn-trim" role="button"> Employee</a>
+      <a href="{% url 'add_Employee' %}" class="btn btn-warning btn-sm btn-pad" role="button"> +</a>
+
+      <a href="{% url 'display_Location' %}" class="btn btn-primary btn-md btn-trim" role="button"> Location</a>
+      <a href="{% url 'add_Location' %}" class="btn btn-warning btn-sm btn-pad" role="button"> +</a>
+
+      <a href="{% url 'display_Financial' %}" class="btn btn-primary btn-md btn-trim" role="button"> Financial</a>
+      <a href="{% url 'add_Financial' %}" class="btn btn-warning btn-sm btn-pad" role="button"> +</a>
+
+      <a href="{% url 'display_Cost' %}" class="btn btn-primary btn-md btn-trim" role="button"> Cost</a>
+      <a href="{% url 'add_Cost' %}" class="btn btn-warning btn-sm btn-pad" role="button"> +</a>
+
+      <a href="{% url 'display_Rewards' %}" class="btn btn-primary btn-md btn-trim" role="button"> Rewards</a>
+      <a href="{% url 'add_Rewards' %}" class="btn btn-warning btn-sm btn-pad" role="button"> +</a>
+
+
+
+    </div>
+
+  </div>
+
+<h4>Currently Viewing {{ header }}</h4>
+
+
+<!--  FILTER SECTION (Janky, but works)-->
+{% if header == "Restaurant_Report" %}
+
+<form method="get">
+    {{rest_filter.form}}
+    <button class="btn btn-primary" type="submit">Update Report</button>
+</form>
+
+
+{% endif %}
+
+{% if header == "Employee_Report" %}
+<form method="get">
+    {{emp_filter.form}}
+    <button class="btn btn-primary" type="submit">Update Report</button>
+</form>
+{% endif %}
+
+{% if header == "Location_Report" %}
+<form method="get">
+    {{loc_filter.form}}
+    <button class="btn btn-primary" type="submit">Update Report</button>
+</form>
+{% endif %}
+
+{% if header == "Financial_Report" %}
+<form method="get">
+    {{fin_filter.form}}
+    <button class="btn btn-primary" type="submit">Update Report</button>
+</form>
+{% endif %}
+
+{% if header == "Cost_Report" %}
+<form method="get">
+    {{cost_filter.form}}
+    <button class="btn btn-primary" type="submit">Update Report</button>
+</form>
+{% endif %}
+
+{% if header == "Rewards_Report" %}
+<form method="get">
+    {{rew_filter.form}}
+    <button class="btn btn-primary" type="submit">Update Report</button>
+</form>
+{% endif %}
+
+
+<!-- End of Filters-->
+
+<table class="table table-hover">
+
+<!--    Restaurant Table View-->
+    {% if header == "Restaurant" %}
+    <form method="get">
+            <a href="{% url 'display_Restaurant_Report' %}" class="btn btn-primary btn-md btn-trim" role="button"> Generate New Report </a>
+    </form>
+    <thead>
+    <tr>
+        <th>
+            Restaurant_Id
+        </th>
+        <th>
+            Name
+        </th>
+        <th>
+            Type
+        </th>
+        <th>
+            Dining_Environment
+        </th>
+        <th>
+            Number_of_Total_Employees
+        </th>
+        <th>
+            Cuisine
+        </th>
+        <th>
+            Max_Capacity
+        </th>
+        <th>
+            Meal_Type
+        </th>
+        <th>
+            Rating
+        </th>
+
+    </tr>
+    </thead>
+
+    <tbody>
+
+    {% for item in items %}
+
+      <tr>
+        <td>{{ item.Restaurant_Id }}
+        <td>{{ item.Name }}</td>
+        <td>{{ item.Type }}</td>
+        <td>{{ item.Dining_Environment}}</td>
+        <td>{{ item.Number_Total_Employees}}</td>
+        <td>{{ item.Cuisine}}</td>
+        <td>{{ item.Max_Capacity}}</td>
+        <td>{{ item.Meal_Type}}</td>
+        <td>{{ item.Rating }}</td>
+
+        <td>
+            <a href="{% url 'edit_Restaurant' item.pk %}" class="btn btn-warning btn-sm" role="button" aria-pressed="true" > Edit</a>
+            <a href="{% url 'delete_Restaurant' item.pk%}" class="btn btn-danger btn-sm" role="button" aria-pressed="true" > x</a>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+
+    {% endif %}
+
+
+<!--    Employee Table View-->
+    {% if header == "Employee" %}
+    <form method="get">
+            <a href="{% url 'display_Employee_Report' %}" class="btn btn-primary btn-md btn-trim" role="button"> Generate New Report </a>
+    </form>
+    <thead>
+    <tr>
+        <th>
+            Employee_Id
+        </th>
+        <th>
+            Restaurant
+        </th>
+        <th>
+            Name
+        </th>
+        <th>
+            Job_Type
+        </th>
+        <th>
+            Hourly_Salary
+        </th>
+        <th>
+            Weekly_Hours
+        </th>
+        <th>
+            Weekly_Salary
+        </th>
+        <th>
+            Employee_Satisfaction
+        </th>
+    </tr>
+    </thead>
+
+    <tbody>
+
+    {% for item in items %}
+
+      <tr>
+        <td>{{ item.Employee_Id }}
+        <td>{{ item.Restaurant }}</td>
+        <td>{{ item.Name }}</td>
+        <td>{{ item.Job_Type }}</td>
+        <td>{{ item.Hourly_Salary }}</td>
+        <td>{{ item.Weekly_Hours }}</td>
+        <td>{{ item.Weekly_Salary}}</td>
+        <td>{{ item.Satisfaction }}</td>
+
+
+        <td>
+            <a href="{% url 'edit_Employee' item.pk %}" class="btn btn-warning btn-sm" role="button" aria-pressed="true" > Edit</a>
+            <a href="{% url 'delete_Employee' item.pk%}" class="btn btn-danger btn-sm" role="button" aria-pressed="true" > x</a>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+
+    {% endif %}
+
+<!--    Location Table View-->
+    {% if header == "Location" %}
+    <form method="get">
+            <a href="{% url 'display_Location_Report' %}" class="btn btn-primary btn-md btn-trim" role="button"> Generate New Report </a>
+    </form>
+    <thead>
+    <tr>
+        <th>
+            Location_Id
+        </th>
+        <th>
+            Restaurant_Id
+        </th>
+        <th>
+            Town
+        </th>
+        <th>
+            State
+        </th>
+        <th>
+            Address
+        </th>
+
+    </tr>
+    </thead>
+
+    <tbody>
+
+    {% for item in items %}
+
+      <tr>
+        <td>{{ item.Location_Id }}
+        <td>{{ item.Restaurant }}</td>
+        <td>{{ item.Town }}</td>
+        <td>{{ item.State }}</td>
+        <td>{{ item.Address }}</td>
+        <td>
+            <a href="{% url 'edit_Location' item.pk %}" class="btn btn-warning btn-sm" role="button" aria-pressed="true" > Edit</a>
+            <a href="{% url 'delete_Location' item.pk%}" class="btn btn-danger btn-sm" role="button" aria-pressed="true" > x</a>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+
+    {% endif %}
+
+<!--    Financial Table View-->
+    {% if header == "Financial" %}
+     <form method="get">
+            <a href="{% url 'display_Financial_Report' %}" class="btn btn-primary btn-md btn-trim" role="button"> Generate New Report </a>
+    </form>
+    <thead>
+    <tr>
+        <th>
+            Financial_Id
+        </th>
+        <th>
+            Date
+        </th>
+        <th>
+            Restaurant_Id
+        </th>
+        <th>
+            Cost_Id
+        </th>
+        <th>
+            Revenue_Per_Month
+        </th>
+        <th>
+            Costs_Per_Month
+        </th>
+        <th>
+            Net_Per_Month
+        </th>
+    </tr>
+    </thead>
+
+    <tbody>
+
+    {% for item in items %}
+
+      <tr>
+        <td>{{ item.Financial_Id }}</td>
+          <td>{{ item.Date }}</td>
+          <td>{{ item.Restaurant }}</td>
+          <td>{{ item.Cost }}</td>
+          <td>{{ item.Revenue_Per_Month }}</td>
+          <td>{{ item.Costs_Per_Month }}</td>
+          <td>{{ item.Net_Profit_Per_Month }}</td>
+
+        <td>
+            <a href="{% url 'edit_Financial' item.pk %}" class="btn btn-warning btn-sm" role="button" aria-pressed="true" > Edit</a>
+            <a href="{% url 'delete_Financial' item.pk%}" class="btn btn-danger btn-sm" role="button" aria-pressed="true" > x</a>
+        </td>
+      </tr>
+
+    {% endfor %}
+    </tbody>
+
+    {% endif %}
+
+<!--    Cost Table View-->
+    {% if header == "Cost" %}
+    <thead>
+    <tr>
+        <th>
+            Cost_Id
+        </th>
+        <th>
+            Total_Salaries
+        </th>
+        <th>
+            Rent
+        </th>
+        <th>
+            Utilities
+        </th>
+        <th>
+            Inventory
+        </th>
+        <th>
+            Total_Costs
+        </th>
+    </tr>
+    </thead>
+
+    <tbody>
+
+    {% for item in items %}
+
+      <tr>
+          <td>{{ item.Cost_Id }}</td>
+          <td>{{ item.Total_Salaries }}</td>
+          <td>{{ item.Rent }}</td>
+          <td>{{ item.Utilities }}</td>
+          <td>{{ item.Inventory_Expenses }}</td>
+          <td>{{ item.Total_Costs }}</td>
+        <td>
+            <a href="{% url 'edit_Cost' item.pk %}" class="btn btn-warning btn-sm" role="button" aria-pressed="true" > Edit</a>
+            <a href="{% url 'delete_Cost' item.pk%}" class="btn btn-danger btn-sm" role="button" aria-pressed="true" > x</a>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+
+    {% endif %}
+
+<!--    Rewards Table View-->
+    {% if header == "Rewards" %}
+    <form method="get">
+            <a href="{% url 'display_Rewards_Report' %}" class="btn btn-primary btn-md btn-trim" role="button"> Generate New Report </a>
+    </form>
+
+    <thead>
+    <tr>
+        <th>
+            Customer_Id
+        </th>
+        <th>
+            Customer_Name
+        </th>
+        <th>
+            Restaurant_Id
+        </th>
+        <th>
+            Program_Name
+        </th>
+        <th>
+            Total_Points
+        </th>
+        <th>
+            Cumulative_Rewards_Used
+        </th>
+
+    </tr>
+    </thead>
+
+    <tbody>
+
+    {% for item in items %}
+
+      <tr>
+          <td>{{ item.Customer_Id }}</td>
+          <td>{{ item.Customer_Name }}</td>
+          <td>{{ item.Restaurant }}</td>
+          <td>{{ item.Program_Name }}</td>
+          <td>{{ item.Total_Points}}</td>
+          <td>{{ item.Cumulative_Points_Used }}</td>
+        <td>
+            <a href="{% url 'edit_Rewards' item.pk %}" class="btn btn-warning btn-sm" role="button" aria-pressed="true" > Edit</a>
+            <a href="{% url 'delete_Rewards' item.pk%}" class="btn btn-danger btn-sm" role="button" aria-pressed="true" > x</a>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+
+    {% endif %}
+
+
+
+    {% if header == "Restaurant_Report" %}
+
+    <thead>
+    <tr>
+        <th>
+            Cuisine_Type
+        </th>
+        <th>
+            Type_Of_Dining_Environment
+        </th>
+        <th>
+            Avg_Restaurant Rating
+        </th>
+    </tr>
+    </thead>
+
+    <tbody>
+
+    {% for item in items %}
+
+      <tr>
+          <td>{{ item.Cuisine }}</td>
+          <td>{{ item.Dining_Environment}}</td>
+          <td>{{ item.avg }}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+    {% endif %}
+
+
+    {% if header == "Employee_Report" %}
+
+    <thead>
+    <tr>
+        <th>
+            Restaurant_ID
+        </th>
+        <th>
+            Job_Type
+        </th>
+        <th>
+            Avg Weekly Salary
+        </th>
+        <th>
+            Count of Job Type
+        </th>
+    </tr>
+    </thead>
+
+    <tbody>
+
+    {% for item in items %}
+
+      <tr>
+          <td>{{ item.Restaurant }}</td>
+          <td>{{ item.Job_Type }}</td>
+          <td>{{ item.avg }}</td>
+          <td>{{ item.count }}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+    {% endif %}
+
+    {% if header == "Financial_Report" %}
+
+    <thead>
+    <tr>
+        <th>
+            Restaurant_ID
+        </th>
+        <th>
+            Date
+        </th>
+        <th>
+            Net_Profit
+        </th>
+    </tr>
+    </thead>
+
+    <tbody>
+
+    {% for item in items %}
+
+      <tr>
+          <td>{{ item.Restaurant }}</td>
+          <td>{{ item.Date }}</td>
+          <td>{{ item.count }}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+    {% endif %}
+
+
+    {% if header == "Rewards_Report" %}
+
+    <thead>
+    <tr>
+        <th>
+            Restaurant_ID
+        </th>
+        <th>
+            Program_Name
+        </th>
+        <th>
+            Total_Points
+        </th>
+        <th>
+            Cumulative_Points_Used
+        </th>
+
+    </tr>
+    </thead>
+
+    <tbody>
+
+    {% for item in items %}
+
+      <tr>
+          <td>{{ item.Restaurant }}</td>
+          <td>{{ item.Program_Name}}</td>
+          <td>{{ item.tot}}</td>
+          <td>{{ item.cum }}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+    {% endif %}
+
+
+    {% if header == "Location_Report" %}
+
+    <thead>
+    <tr>
+        <th>
+            State Name
+        </th>
+
+        <th>
+            Restaurant Count
+        </th>
+
+    </tr>
+    </thead>
+
+    <tbody>
+
+    {% for item in items %}
+
+      <tr>
+          <td>{{ item.State }}</td>
+          <td>{{ item.count }}</td>
+
+      </tr>
+
+    {% endfor %}
+    </tbody>
+    {% endif %}
+
+</table>
+
+{% endblock %}
+
