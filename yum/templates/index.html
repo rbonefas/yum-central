@@ -1,34 +1,40 @@
 {% extends 'base.html' %}
 {% block body %}
 
-  <div class="add_buttons">
+    <div class="add_buttons">
 
     <div class="button-group">
-      <a href="{% url 'display_Restaurant' %}" class="btn btn-primary btn-md btn-trim" role="button"> Restaurant</a>
-      <a href="{% url 'add_Restaurant' %}" class="btn btn-warning btn-sm btn-pad" role="button"> +</a>
+        <div class="col text-center">
+            <div class="button-group">
+                <a href="{% url 'display_Restaurant' %}" class="btn btn-primary btn-md btn-trim" role="button">
+                    Restaurant</a>
+                <a href="{% url 'add_Restaurant' %}" class="btn btn-warning btn-sm btn-pad" role="button"> +</a>
 
-      <a href="{% url 'display_Employee' %}" class="btn btn-primary btn-md btn-trim" role="button"> Employee</a>
-      <a href="{% url 'add_Employee' %}" class="btn btn-warning btn-sm btn-pad" role="button"> +</a>
+                <a href="{% url 'display_Employee' %}" class="btn btn-primary btn-md btn-trim" role="button">
+                    Employee</a>
+                <a href="{% url 'add_Employee' %}" class="btn btn-warning btn-sm btn-pad" role="button"> +</a>
 
-      <a href="{% url 'display_Location' %}" class="btn btn-primary btn-md btn-trim" role="button"> Location</a>
-      <a href="{% url 'add_Location' %}" class="btn btn-warning btn-sm btn-pad" role="button"> +</a>
+                <a href="{% url 'display_Location' %}" class="btn btn-primary btn-md btn-trim" role="button">
+                    Location</a>
+                <a href="{% url 'add_Location' %}" class="btn btn-warning btn-sm btn-pad" role="button"> +</a>
 
-      <a href="{% url 'display_Financial' %}" class="btn btn-primary btn-md btn-trim" role="button"> Financial</a>
-      <a href="{% url 'add_Financial' %}" class="btn btn-warning btn-sm btn-pad" role="button"> +</a>
+                <a href="{% url 'display_Financial' %}" class="btn btn-primary btn-md btn-trim" role="button">
+                    Financial</a>
+                <a href="{% url 'add_Financial' %}" class="btn btn-warning btn-sm btn-pad" role="button"> +</a>
 
-      <a href="{% url 'display_Cost' %}" class="btn btn-primary btn-md btn-trim" role="button"> Cost</a>
-      <a href="{% url 'add_Cost' %}" class="btn btn-warning btn-sm btn-pad" role="button"> +</a>
+                <a href="{% url 'display_Cost' %}" class="btn btn-primary btn-md btn-trim" role="button"> Cost</a>
+                <a href="{% url 'add_Cost' %}" class="btn btn-warning btn-sm btn-pad" role="button"> +</a>
 
-      <a href="{% url 'display_Rewards' %}" class="btn btn-primary btn-md btn-trim" role="button"> Rewards</a>
-      <a href="{% url 'add_Rewards' %}" class="btn btn-warning btn-sm btn-pad" role="button"> +</a>
+                <a href="{% url 'display_Rewards' %}" class="btn btn-primary btn-md btn-trim" role="button"> Rewards</a>
+                <a href="{% url 'add_Rewards' %}" class="btn btn-warning btn-sm btn-pad" role="button"> +</a>
+            </div>
 
 
+        </div>
 
     </div>
 
-  </div>
-
-<h4>Currently Viewing {{ header }}</h4>
+<h4>{{ header }}</h4>
 
 
 <!--  FILTER SECTION (Janky, but works)-->
@@ -81,6 +87,13 @@
 <!-- End of Filters-->
 
 <table class="table table-hover">
+
+    {% if header == NULL %}
+        <div class="image" style="text-align: center; position:fixed; top:250px; left:400px">
+            {% load static %} <img src="{% static "media/yum-central-image.png" %}" width="608" height="472"
+                                   alt="logo"/>
+        </div>
+    {% endif %}
 
 <!--    Restaurant Table View-->
     {% if header == "Restaurant" %}
