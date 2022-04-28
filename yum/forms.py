@@ -4,6 +4,7 @@ class RestaurantForm(forms.ModelForm):
     class Meta:
         model = Restaurant
         fields = '__all__'
+        exclude = ["Number_Total_Employees"]
 
 class EmployeeForm(forms.ModelForm):
     class Meta:
@@ -26,6 +27,7 @@ class CostForm(forms.ModelForm):
     class Meta:
         model = Cost
         fields = '__all__'
+        exclude = ["Total_Salaries","Total_Costs"]
 
 class RewardsForm(forms.ModelForm):
     class Meta:
