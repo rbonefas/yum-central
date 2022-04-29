@@ -10,7 +10,7 @@ class Restaurant(models.Model):
     Name = models.CharField(max_length=40, null=False)
     Type = models.CharField(max_length=40)
     Dining_Environment = models.CharField(max_length=40)
-    Number_Total_Employees = models.IntegerField()
+    Number_Total_Employees = models.IntegerField(null=True)
     Cuisine = models.CharField(max_length=40)
     Max_Capacity = models.IntegerField()
     Meal_Type = models.CharField(max_length=40)
@@ -77,11 +77,11 @@ class Location(models.Model):
 
 class Cost(models.Model):
     Cost_Id = models.IntegerField(primary_key=True,null=False)
-    Total_Salaries = models.FloatField(default=0)
+    Total_Salaries = models.FloatField(default=0,null=True)
     Rent = models.FloatField()
     Utilities = models.FloatField()
     Inventory_Expenses = models.FloatField()
-    Total_Costs = models.FloatField()
+    Total_Costs = models.FloatField(null=True)
 
     def __str__(self):
         return '{}'.format(self.Cost_Id)
