@@ -9,7 +9,7 @@ class Restaurant(models.Model):
     Restaurant_Id = models.IntegerField(primary_key=True, null=False)
     Name = models.CharField(max_length=40, null=False)
     Type = models.CharField(max_length=40)
-    Dining_Environment = models.CharField(max_length=40)
+    Dining_Environment = models.CharField(max_length=40,default=0)
     Number_Total_Employees = models.IntegerField(null=True)
     Cuisine = models.CharField(max_length=40)
     Max_Capacity = models.IntegerField()
